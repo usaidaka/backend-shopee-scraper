@@ -1,0 +1,205 @@
+#!/usr/bin/expect -f
+# ============================================================
+# PHASE 2: Fix & Complete Deployment
+# - Fix Docker/PostgreSQL setup
+# - Clone repository properly
+# - Install deps & start backend
+# ============================================================
+
+set timeout 600
+log_user 1
+
+puts "\n============================================"
+puts "  PHASE 2: Fix & Complete Deployment"
+puts "============================================\n"
+
+spawn ssh -p 2222 -o StrictHostKeyChecking=no -o ServerAliveInterval=60 ubuntu@43.129.52.140
+
+expect {
+    "password:" { send "KobessahKopi2025\r" }
+    timeout { puts "\[ERROR\] Connection timeout"; exit 1 }
+}
+
+expect -re {[\$#] }
+sleep 1
+
+# ─── Check what docker command is available ──────────────────
+puts "\n--- Checking Docker availability ---"
+send "which docker && docker --version\r"
+expect -re {[\$#] }
+
+send "which docker.io 2>/dev/null; dpkg -l docker* 2>/dev/null | grep ^ii\r"
+expect -re {[\$#] }
+
+# ─── Try to start postgres container using existing docker ────
+puts "\n--- Setting up PostgreSQL container ---"
+
+# Check if postgres image or container exists
+send "docker ps -a 2>/dev/null | head -20\r"
+expect -re {[\$#] }
+
+# Remove old broken container if any
+send "docker rm -f shopee-postgres 2>/dev/null; echo 'CLEANUP_DONE'\r"
+expect "CLEANUP_DONE"
+expect -re {[\$#] }
+
+# Pull postgres image and create container
+puts "  Creating shopee-postgres container..."
+send "docker run -d --name shopee-postgres --restart unless-stopped -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD='Admin122!' -e POSTGRES_DB=shopee_scraper -p 5432:5432 postgres:15 && echo 'PG_STARTED'\r"
+set timeout 120
+expect {
+    "PG_STARTED" { puts "  PostgreSQL container STARTED!"; set timeout 600 }
+    "Error" { puts "  ERROR starting container"; set timeout 600 }
+    timeout { puts "  TIMEOUT"; set timeout 600 }
+}
+expect -re {[\$#] }
+
+# Wait for PG to initialize
+send "echo 'Waiting for PostreSQL to init...' && sleep 10 && docker exec shopee-postgres pg_isready -U postgres && echo 'PG_READY'\r"
+set timeout 30
+expect {
+    "PG_READY" { puts "  PostgreSQL is READY!" }
+    timeout { puts "  PG might need more time..." }
+}
+set timeout 600
+expect -re {[\$#] }
+
+# ─── Clone repository ─────────────────────────────────────────
+puts "\n--- Cloning repository ---"
+send "ls /opt/usaid/\r"
+expect -re {[\$#] }
+
+# Remove broken partial dir if exists
+send "rm -rf /opt/usaid/backend-shopee-scraper 2>/dev/null; echo 'CLEANED'\r"
+expect "CLEANED"
+expect -re {[\$#] }
+
+send "cd /opt/usaid && git clone https://github.com/usaidaka/backend-shopee-scraper.git && echo 'CLONE_DONE'\r"
+set timeout 60
+expect {
+    "CLONE_DONE" { puts "  Repository cloned successfully!" }
+    "already exists" { puts "  Repository already exists" }
+    timeout { puts "  Clone timeout" }
+}
+set timeout 600
+expect -re {[\$#] }
+
+send "ls /opt/usaid/backend-shopee-scraper/\r"
+expect -re {[\$#] }
+
+# ─── Create .env file ─────────────────────────────────────────
+puts "\n--- Creating .env file ---"
+send {cat > /opt/usaid/backend-shopee-scraper/.env << 'ENVEOF'
+DATABASE_URL=postgres://postgres:Admin122!@localhost:5432/shopee_scraper
+PORT=3001
+SHOPEE_COOKIE=""
+SHOPEE_USER_AGENT="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+SHOPEE_CSRF_TOKEN=
+SHOPEE_AF_AC_ENC_DAT=
+SHOPEE_ACF_SENSOR_DATA=
+SHOPEE_API_SOURCE=pc
+SHOPEE_LANGUAGE=id
+ENVEOF
+}
+send "\r"
+expect -re {[\$#] }
+send "echo '.env created:' && cat /opt/usaid/backend-shopee-scraper/.env | head -5\r"
+expect -re {[\$#] }
+
+# ─── Install npm dependencies ─────────────────────────────────
+puts "\n--- Installing npm dependencies ---"
+send "cd /opt/usaid/backend-shopee-scraper && npm install 2>&1 | tail -5 && echo 'NPM_DONE'\r"
+set timeout 180
+expect {
+    "NPM_DONE" { puts "  npm install complete!" }
+    timeout { puts "  npm install taking long..." }
+}
+set timeout 600
+expect -re {[\$#] }
+
+# ─── Install Playwright system dependencies ───────────────────
+puts "\n--- Installing Playwright system dependencies ---"
+send "sudo apt-get install -y libnss3 libnspr4 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1 libpango-1.0-0 libcairo2 libasound2 libatspi2.0-0 2>&1 | tail -3 && echo 'PKG_DONE'\r"
+set timeout 120
+expect {
+    "PKG_DONE" { puts "  System packages installed!" }
+    timeout { puts "  Package install timeout" }
+}
+set timeout 600
+expect -re {[\$#] }
+
+# Install playwright browsers
+send "cd /opt/usaid/backend-shopee-scraper && npx playwright install chromium 2>&1 | tail -5 && echo 'PW_DONE'\r"
+set timeout 300
+expect {
+    "PW_DONE" { puts "  Playwright chromium installed!" }
+    timeout { puts "  Playwright install timeout" }
+}
+set timeout 600
+expect -re {[\$#] }
+
+# ─── Initialize Database ──────────────────────────────────────
+puts "\n--- Initializing database schema ---"
+send "cd /opt/usaid/backend-shopee-scraper && node init-db.js && echo 'DB_INIT_DONE'\r"
+set timeout 30
+expect {
+    "DB_INIT_DONE" { puts "  Database initialized!" }
+    "Error" { puts "  DB init error - check PostgreSQL" }
+    timeout { puts "  DB init timeout" }
+}
+set timeout 600
+expect -re {[\$#] }
+
+# ─── Start Backend with PM2 ───────────────────────────────────
+puts "\n--- Starting backend with PM2 ---"
+send "pm2 delete shopee-backend 2>/dev/null; echo 'OLD_DELETED'\r"
+expect "OLD_DELETED"
+expect -re {[\$#] }
+
+send "cd /opt/usaid/backend-shopee-scraper && pm2 start index.js --name shopee-backend && echo 'PM2_STARTED'\r"
+set timeout 30
+expect {
+    "PM2_STARTED" { puts "  Backend started with PM2!" }
+    timeout { puts "  PM2 start timeout" }
+}
+set timeout 600
+expect -re {[\$#] }
+
+send "pm2 save && echo 'PM2_SAVED'\r"
+expect "PM2_SAVED"
+expect -re {[\$#] }
+
+# Setup PM2 startup on boot
+send "pm2 startup 2>/dev/null | grep 'sudo env' | bash 2>/dev/null; echo 'STARTUP_DONE'\r"
+expect "STARTUP_DONE"
+expect -re {[\$#] }
+
+# ─── Final Status Check ───────────────────────────────────────
+puts "\n============================================"
+puts "  FINAL STATUS"
+puts "============================================\n"
+
+send "pm2 list\r"
+expect -re {[\$#] }
+
+send "pm2 logs shopee-backend --lines 10 --nostream 2>/dev/null || echo 'NO_LOGS_YET'\r"
+expect -re {[\$#] }
+
+send "docker ps\r"
+expect -re {[\$#] }
+
+send "sleep 3 && curl -s http://localhost:3001/api/search?q=nike 2>&1 | head -c 200 && echo ''\r"
+set timeout 30
+expect -re {[\$#] }
+
+puts "\n============================================"
+puts "  Done! Summary:"
+puts "  - PostgreSQL: Docker (port 5432)"
+puts "  - Backend: PM2 (port 3001)"
+puts "  - App URL: http://43.129.52.140:3001"
+puts "============================================\n"
+puts "IMPORTANT: Update Shopee cookies at:"
+puts "  /opt/usaid/backend-shopee-scraper/.env"
+
+send "exit\r"
+expect eof

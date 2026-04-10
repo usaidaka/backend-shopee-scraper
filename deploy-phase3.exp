@@ -1,0 +1,156 @@
+#!/usr/bin/expect -f
+# Install git then clone repo and finalize deployment
+
+set timeout 600
+log_user 1
+
+puts "\n============================================"
+puts "  FINAL DEPLOYMENT SCRIPT"
+puts "============================================\n"
+
+spawn ssh -p 2222 -o StrictHostKeyChecking=no -o ServerAliveInterval=60 ubuntu@43.129.52.140
+
+expect {
+    "password:" { send "KobessahKopi2025\r" }
+    timeout { puts "ERROR: Connection timeout"; exit 1 }
+}
+expect -re {[\$#] }
+sleep 1
+
+send {bash -s << 'DEPLOY_SCRIPT'
+#!/bin/bash
+echo ""
+echo "=== FINAL BACKEND DEPLOYMENT ==="
+
+# Install git if missing
+if ! command -v git &>/dev/null; then
+    echo "Installing git..."
+    sudo apt-get install -y git 2>&1 | tail -2
+fi
+echo "git: $(git --version)"
+
+# Step 1: PostgreSQL
+echo ""
+echo "--- STEP 1: PostgreSQL ---"
+if docker ps | grep -q shopee-postgres; then
+    echo "  shopee-postgres RUNNING"
+else
+    docker start shopee-postgres 2>/dev/null || docker run -d \
+        --name shopee-postgres \
+        --restart unless-stopped \
+        -e POSTGRES_USER=postgres \
+        -e "POSTGRES_PASSWORD=Admin122!" \
+        -e POSTGRES_DB=shopee_scraper \
+        -p 5432:5432 postgres:15
+    sleep 8
+fi
+docker ps | grep shopee-postgres
+
+# Step 2: Clone/update repo
+echo ""
+echo "--- STEP 2: Repository ---"
+if [ -d /opt/usaid/backend-shopee-scraper/.git ]; then
+    echo "  Repo exists, pulling..."
+    cd /opt/usaid/backend-shopee-scraper && git pull 2>&1 | tail -2
+else
+    echo "  Cloning..."
+    rm -rf /opt/usaid/backend-shopee-scraper
+    git clone https://github.com/usaidaka/backend-shopee-scraper.git /opt/usaid/backend-shopee-scraper
+    echo "  Clone complete."
+fi
+ls /opt/usaid/backend-shopee-scraper/
+
+# Step 3: Create .env
+echo ""
+echo "--- STEP 3: .env ---"
+cd /opt/usaid/backend-shopee-scraper
+if [ ! -f .env ]; then
+    cat > .env << 'ENVEOF'
+DATABASE_URL=postgres://postgres:Admin122!@localhost:5432/shopee_scraper
+PORT=3001
+SHOPEE_COOKIE=""
+SHOPEE_USER_AGENT="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+SHOPEE_CSRF_TOKEN=
+SHOPEE_AF_AC_ENC_DAT=
+SHOPEE_ACF_SENSOR_DATA=
+SHOPEE_API_SOURCE=pc
+SHOPEE_LANGUAGE=id
+ENVEOF
+    echo "  .env CREATED"
+else
+    echo "  .env EXISTS (preserved)"
+fi
+echo "  DATABASE_URL=$(grep DATABASE_URL .env)"
+
+# Step 4: npm install
+echo ""
+echo "--- STEP 4: npm install ---"
+cd /opt/usaid/backend-shopee-scraper
+npm install 2>&1 | grep -E "^added|npm warn|^npm error" | head -5
+echo "  npm install done"
+
+# Step 5: Playwright deps
+echo ""
+echo "--- STEP 5: Playwright ---"
+cd /opt/usaid/backend-shopee-scraper
+npx playwright install chromium --with-deps 2>&1 | grep -vE "^$|Downloading" | tail -6
+echo "  Playwright done"
+
+# Step 6: Init database schema
+echo ""
+echo "--- STEP 6: Init DB Schema ---"
+cd /opt/usaid/backend-shopee-scraper
+node init-db.js 2>&1
+
+# Step 7: Start with PM2
+echo ""
+echo "--- STEP 7: PM2 ---"
+cd /opt/usaid/backend-shopee-scraper
+pm2 stop shopee-backend 2>/dev/null || true
+pm2 delete shopee-backend 2>/dev/null || true
+pm2 start index.js --name shopee-backend
+pm2 save --force
+
+# PM2 autostart on reboot
+CMD=$(pm2 startup 2>/dev/null | grep 'sudo env')
+if [ -n "$CMD" ]; then
+    eval "$CMD" 2>&1 | tail -1
+    echo "  PM2 startup configured"
+fi
+
+# Final status
+echo ""
+echo "=== FINAL STATUS ==="
+sleep 5
+pm2 list
+echo ""
+echo "Port check:"
+ss -tlnp | grep -E '3001|5432'
+echo ""
+echo "PM2 logs:"
+pm2 logs shopee-backend --lines 20 --nostream 2>/dev/null || true
+echo ""
+echo "API test:"
+curl -s --max-time 8 "http://localhost:3001/api/search?q=test" 2>&1 | head -c 200
+echo ""
+echo ""
+echo "=== DEPLOYMENT COMPLETE ==="
+echo "URL: http://43.129.52.140:3001"
+DEPLOY_SCRIPT
+}
+send "\r"
+
+set timeout 600
+expect {
+    "DEPLOYMENT COMPLETE" {
+        puts "\n\n=== SUCCESS! ==="
+    }
+    eof {
+        puts "\n=== SSH session ended ==="
+    }
+    timeout {
+        puts "\n=== TIMEOUT waiting for completion ==="
+    }
+}
+
+expect eof

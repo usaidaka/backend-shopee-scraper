@@ -1,7 +1,25 @@
 const browserManager = require('./browserManager');
 const TokenStore = require('./tokenStore');
 const { simulateHumanMouse, simulateHumanScroll, humanDelay } = require('./browserUtils');
+const { URL } = require('url');
 require('dotenv').config();
+
+function getProxyConfig() {
+    const proxyStr = process.env.SHOPEE_PROXY;
+    if (!proxyStr) return undefined;
+    
+    try {
+        const proxyUrl = new URL(proxyStr);
+        return {
+            server: `${proxyUrl.protocol}//${proxyUrl.hostname}:${proxyUrl.port}`,
+            username: proxyUrl.username ? decodeURIComponent(proxyUrl.username) : undefined,
+            password: proxyUrl.password ? decodeURIComponent(proxyUrl.password) : undefined
+        };
+    } catch (e) {
+        console.warn(`[Proxy] Format SHOPEE_PROXY tidak valid: ${e.message}`);
+        return undefined;
+    }
+}
 
 /**
  * Automates the process of visiting Shopee and "harvesting" fresh security tokens.
@@ -12,8 +30,15 @@ async function warmSession() {
     let context;
     let page;
     try {
+        const browserOptions = { headless: false };
+        const proxyConfig = getProxyConfig();
+        if (proxyConfig) {
+            console.log(`[Proxy-Warmer] Menghubungkan via proxy: ${proxyConfig.server}`);
+            browserOptions.proxy = proxyConfig;
+        }
+
         // Gunakan shared context dari manager
-        context = await browserManager.getContext({ headless: true });
+        context = await browserManager.getContext(browserOptions);
 
         // Buat page baru dalam context yang sama
         page = await context.newPage();

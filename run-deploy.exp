@@ -1,0 +1,209 @@
+#!/usr/bin/expect -f
+# SSH Deployment Script for Shopee Backend
+# Uses expect to automate password-based SSH
+
+set timeout 600
+set HOST "43.129.52.140"
+set PORT "2222"
+set USER "ubuntu"
+set PASS "KobessahKopi2025"
+
+log_user 1
+
+proc send_cmd {cmd} {
+    send "$cmd\n"
+    expect {
+        "$ " {}
+        "# " {}
+        timeout {
+            puts "\r\n[TIMEOUT] Command may be taking longer than expected..."
+        }
+    }
+}
+
+puts "\n============================================"
+puts "  Shopee Scraper Backend - SSH Deployment   "
+puts "============================================\n"
+
+# ─── Connect via SSH ────────────────────────────────────────
+puts "\[SSH\] Connecting to $USER@$HOST:$PORT...\n"
+
+spawn ssh -p $PORT -o StrictHostKeyChecking=no -o ServerAliveInterval=60 $USER@$HOST
+
+expect {
+    "password:" {
+        send "$PASS\r"
+    }
+    "Permission denied" {
+        puts "\n\[ERROR\] Authentication failed!"
+        exit 1
+    }
+    timeout {
+        puts "\n\[ERROR\] Connection timed out!"
+        exit 1
+    }
+}
+
+# Wait for prompt
+expect {
+    -re {[\$#] $} {}
+    -re {[\$#]\s$} {}
+    timeout { puts "\[WARN\] Unexpected prompt" }
+}
+
+sleep 1
+
+puts "\n\[STEP 1/9\] Ensuring /opt/usaid directory exists..."
+send "sudo mkdir -p /opt/usaid && sudo chown ubuntu:ubuntu /opt/usaid && echo 'DIR_OK'\r"
+expect {
+    "DIR_OK" { puts "  done." }
+    timeout { puts "  \[WARN\] mkdir may not have confirmed" }
+}
+expect -re {[\$#] }
+
+puts "\n\[STEP 2/9\] Checking Node.js..."
+send "node --version 2>/dev/null || echo 'NODE_NOT_FOUND'\r"
+expect {
+    "NODE_NOT_FOUND" {
+        puts "  Node.js not found. Installing..."
+        send "curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash - && sudo apt-get install -y nodejs\r"
+        expect -re {[\$#] } { puts "  Node.js installed." }
+    }
+    -re {v[0-9]+} {
+        puts "  Node.js already installed."
+    }
+}
+expect -re {[\$#] }
+
+puts "\n\[STEP 3/9\] Checking PM2..."
+send "pm2 --version 2>/dev/null || sudo npm install -g pm2\r"
+expect -re {[\$#] } { puts "  PM2 ready." }
+
+puts "\n\[STEP 4/9\] Setting up PostgreSQL with Docker..."
+send "docker --version 2>/dev/null || echo 'DOCKER_NOT_FOUND'\r"
+expect {
+    "DOCKER_NOT_FOUND" {
+        puts "  Docker not found. Installing..."
+        send "sudo apt-get update && sudo apt-get install -y docker.io && sudo systemctl start docker && sudo systemctl enable docker && sudo usermod -aG docker ubuntu\r"
+        expect -re {[\$#] } { puts "  Docker installed." }
+    }
+    -re {Docker version} {
+        puts "  Docker already installed."
+    }
+}
+expect -re {[\$#] }
+
+# Check if postgres container exists
+send "docker ps -a --format '{{.Names}}' 2>/dev/null | grep -q '^shopee-postgres$' && echo 'PG_EXISTS' || echo 'PG_NEW'\r"
+expect {
+    "PG_EXISTS" {
+        puts "  PostgreSQL container exists. Starting if stopped..."
+        send "docker start shopee-postgres 2>/dev/null; docker ps | grep shopee-postgres\r"
+        expect -re {[\$#] }
+    }
+    "PG_NEW" {
+        puts "  Creating PostgreSQL container..."
+        send "docker run -d --name shopee-postgres --restart unless-stopped -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD='Admin122!' -e POSTGRES_DB=shopee_scraper -p 5432:5432 postgres:15\r"
+        expect -re {[\$#] } { puts "  PostgreSQL container created." }
+        send "echo 'Waiting for PG to start...' && sleep 12 && echo 'PG_READY'\r"
+        expect "PG_READY" { puts "  PostgreSQL is ready." }
+        expect -re {[\$#] }
+    }
+}
+
+puts "\n\[STEP 5/9\] Cloning/updating repository..."
+send "test -d /opt/usaid/backend-shopee-scraper && echo 'REPO_EXISTS' || echo 'REPO_NEW'\r"
+expect {
+    "REPO_EXISTS" {
+        puts "  Repo exists. Pulling latest..."
+        send "cd /opt/usaid/backend-shopee-scraper && git pull 2>&1 | tail -3\r"
+        expect -re {[\$#] }
+    }
+    "REPO_NEW" {
+        puts "  Cloning repository..."
+        send "cd /opt/usaid && git clone https://github.com/usaidaka/backend-shopee-scraper.git\r"
+        expect -re {[\$#] } { puts "  Repository cloned." }
+    }
+}
+
+puts "\n\[STEP 6/9\] Creating .env file..."
+send "cd /opt/usaid/backend-shopee-scraper && test -f .env && echo 'ENV_EXISTS' || echo 'ENV_NEW'\r"
+expect {
+    "ENV_EXISTS" {
+        puts "  .env already exists - preserving your config."
+    }
+    "ENV_NEW" {
+        puts "  Creating .env (no cookies - you will update manually)..."
+        send {cat > /opt/usaid/backend-shopee-scraper/.env << 'ENVEOF'
+DATABASE_URL=postgres://postgres:Admin122!@localhost:5432/shopee_scraper
+PORT=3001
+SHOPEE_COOKIE=""
+SHOPEE_USER_AGENT="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+SHOPEE_CSRF_TOKEN=
+SHOPEE_AF_AC_ENC_DAT=
+SHOPEE_ACF_SENSOR_DATA=
+SHOPEE_API_SOURCE=pc
+SHOPEE_LANGUAGE=id
+ENVEOF
+}
+        send "\r"
+        expect -re {[\$#] } { puts "  .env created." }
+    }
+}
+expect -re {[\$#] }
+
+puts "\n\[STEP 7/9\] Installing npm dependencies..."
+send "cd /opt/usaid/backend-shopee-scraper && npm install --production 2>&1 | tail -5\r"
+expect -re {[\$#] } { puts "  npm install done." }
+
+puts "\n\[STEP 8/9\] Installing Playwright/Chromium system dependencies..."
+send "sudo apt-get update -qq && sudo apt-get install -y libnss3 libnspr4 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1 libpango-1.0-0 libcairo2 libasound2 libatspi2.0-0 2>&1 | tail -3\r"
+set timeout 180
+expect -re {[\$#] } { puts "  System dependencies installed." }
+set timeout 600
+
+send "cd /opt/usaid/backend-shopee-scraper && npx playwright install chromium 2>&1 | tail -5\r"
+set timeout 300
+expect -re {[\$#] } { puts "  Playwright chromium installed." }
+set timeout 600
+
+puts "\n\[STEP 9/9\] Initializing database and starting backend with PM2..."
+send "cd /opt/usaid/backend-shopee-scraper && node init-db.js\r"
+expect -re {[\$#] } { puts "  Database initialized." }
+
+# Stop existing PM2 processes
+send "pm2 stop shopee-backend 2>/dev/null; pm2 delete shopee-backend 2>/dev/null; echo 'PM2_CLEAN'\r"
+expect "PM2_CLEAN"
+expect -re {[\$#] }
+
+# Start with PM2
+send "cd /opt/usaid/backend-shopee-scraper && pm2 start index.js --name shopee-backend && pm2 save\r"
+expect -re {[\$#] } { puts "  Backend started with PM2." }
+
+# Setup PM2 startup
+send "pm2 startup 2>/dev/null | tail -1\r"
+expect -re {[\$#] }
+
+# Final status
+puts "\n============================================"
+puts "  Deployment Status Check"
+puts "============================================"
+send "pm2 list\r"
+expect -re {[\$#] }
+
+send "docker ps | grep shopee-postgres\r"
+expect -re {[\$#] }
+
+send "curl -s http://localhost:3001/api/search?q=test 2>&1 | head -1 || echo 'API_CHECK_DONE'\r"
+expect -re {[\$#] }
+
+puts "\n============================================"
+puts "  DEPLOYMENT COMPLETE!"
+puts "  Backend: http://43.129.52.140:3001"
+puts "============================================"
+puts "\nNext step: SSH in and update .env with your Shopee cookies:"
+puts "  nano /opt/usaid/backend-shopee-scraper/.env"
+puts "  pm2 restart shopee-backend"
+
+send "exit\r"
+expect eof

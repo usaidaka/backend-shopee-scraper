@@ -4,9 +4,27 @@ const TokenStore = require('./tokenStore');
 const { simulateHumanMouse, simulateHumanScroll, humanDelay } = require('./browserUtils');
 const fs = require('fs');
 const path = require('path');
+const { URL } = require('url');
 require('dotenv').config();
 
 const USER_DATA_DIR = path.join(__dirname, 'chrome-data');
+
+function getProxyConfig() {
+    const proxyStr = process.env.SHOPEE_PROXY;
+    if (!proxyStr) return undefined;
+    
+    try {
+        const proxyUrl = new URL(proxyStr);
+        return {
+            server: `${proxyUrl.protocol}//${proxyUrl.hostname}:${proxyUrl.port}`,
+            username: proxyUrl.username ? decodeURIComponent(proxyUrl.username) : undefined,
+            password: proxyUrl.password ? decodeURIComponent(proxyUrl.password) : undefined
+        };
+    } catch (e) {
+        console.warn(`[Proxy] Format SHOPEE_PROXY tidak valid: ${e.message}`);
+        return undefined;
+    }
+}
 
 // Error reason constants
 const REASON = {
@@ -24,8 +42,17 @@ async function scrapeViaCamoufox(keyword) {
     let context;
     let page;
     try {
+        const browserOptions = { headless: false };
+        
+        // Injeksi proxy jika ada di environment
+        const proxyConfig = getProxyConfig();
+        if (proxyConfig) {
+            console.log(`[Proxy] Menghubungkan via proxy: ${proxyConfig.server}`);
+            browserOptions.proxy = proxyConfig;
+        }
+
         // Gunakan shared context
-        context = await browserManager.getContext({ headless: true });
+        context = await browserManager.getContext(browserOptions);
         page = await context.newPage();
 
         let capturedItems = null;
