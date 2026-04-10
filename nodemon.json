@@ -1,0 +1,10 @@
+{
+  "ignore": [
+    "session.json",
+    "auth.json",
+    "chrome-data/*",
+    "*.test.js",
+    "node_modules"
+  ],
+  "ext": "js,html,css"
+}
