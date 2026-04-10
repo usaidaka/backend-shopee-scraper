@@ -1,6 +1,7 @@
 const browserManager = require('./browserManager');
 const { warmSession } = require('./warmer');
 const TokenStore = require('./tokenStore');
+const proxyPool = require('./proxyPool');
 const { simulateHumanMouse, simulateHumanScroll, humanDelay } = require('./browserUtils');
 const fs = require('fs');
 const path = require('path');
@@ -9,7 +10,10 @@ require('dotenv').config();
 
 const USER_DATA_DIR = path.join(__dirname, 'chrome-data');
 
-function getProxyConfig() {
+/**
+ * Parse SHOPEE_PROXY dari .env (override manual — prioritas tertinggi)
+ */
+function getEnvProxyConfig() {
     const proxyStr = process.env.SHOPEE_PROXY;
     if (!proxyStr) return undefined;
     
@@ -35,24 +39,18 @@ const REASON = {
 };
 
 /**
- * METHOD 2: Camoufox Browser with Human Simulation (Shared Context)
+ * Scrape Shopee via Camoufox Browser (single attempt)
  */
 async function scrapeViaCamoufox(keyword) {
     console.log(`[Camoufox] Starting deep stealth scrape for: "${keyword}"`);
     let context;
     let page;
     try {
-        const browserOptions = { headless: false };
-        
-        // Injeksi proxy jika ada di environment
-        const proxyConfig = getProxyConfig();
-        if (proxyConfig) {
-            console.log(`[Proxy] Menghubungkan via proxy: ${proxyConfig.server}`);
-            browserOptions.proxy = proxyConfig;
+        // Gunakan shared context (yang sudah dibuat oleh warmer / retry sebelumnya)
+        context = browserManager.context;
+        if (!context) {
+            context = await browserManager.getContext({ headless: false });
         }
-
-        // Gunakan shared context
-        context = await browserManager.getContext(browserOptions);
         page = await context.newPage();
 
         let capturedItems = null;
@@ -189,7 +187,7 @@ async function scrapeViaCamoufox(keyword) {
 }
 
 /**
- * MAIN: Automated Deep Stealth Scraper
+ * MAIN: Scrape dengan retry dan proxy rotation
  */
 async function scrapeShopee(keyword) {
     if (!fs.existsSync(USER_DATA_DIR)) {
@@ -197,7 +195,58 @@ async function scrapeShopee(keyword) {
         await warmSession();
     }
 
-    return scrapeViaCamoufox(keyword);
+    // ─── Attempt 1: Coba dengan koneksi/proxy saat ini ─────────────────
+    let result = await scrapeViaCamoufox(keyword);
+
+    if (result.reason === REASON.SUCCESS || result.reason === REASON.EMPTY) {
+        return result;
+    }
+
+    // ─── Attempt 2+: Jika ANTIBOT dan tidak ada override SHOPEE_PROXY, 
+    //     coba rotasi free proxy (hanya jika diizinkan) ──────────────────────────
+    if (result.reason === REASON.ANTIBOT && !process.env.SHOPEE_PROXY && process.env.SHOPEE_USE_FREE_PROXIES !== 'false') {
+        const MAX_PROXY_RETRIES = 5;
+
+        console.log(`[Scraper] ANTIBOT detected. Trying free proxy rotation (max ${MAX_PROXY_RETRIES} proxies)...`);
+
+        for (let i = 0; i < MAX_PROXY_RETRIES; i++) {
+            const proxy = await proxyPool.getNext();
+            if (!proxy) {
+                console.warn('[Scraper] No more proxies available.');
+                break;
+            }
+
+            try {
+                console.log(`[Scraper] Retry ${i + 1}/${MAX_PROXY_RETRIES} with proxy: ${proxy.server}`);
+                await browserManager.restartWithProxy({ server: proxy.server });
+
+                result = await scrapeViaCamoufox(keyword);
+
+                if (result.reason === REASON.SUCCESS) {
+                    console.log(`[Scraper] ✅ Success with proxy: ${proxy.server}`);
+                    return result;
+                }
+
+                if (result.reason === REASON.EMPTY) {
+                    return result;
+                }
+
+                // Masih ANTIBOT → tandai proxy ini jelek
+                console.log(`[Scraper] Proxy ${proxy.host} blocked. Trying next...`);
+                proxyPool.markBad(proxy);
+
+            } catch (err) {
+                console.error(`[Scraper] Proxy ${proxy.host} error: ${err.message}`);
+                proxyPool.markBad(proxy);
+            }
+        }
+
+        console.warn(`[Scraper] All ${MAX_PROXY_RETRIES} proxy attempts failed.`);
+        const stats = proxyPool.getStats();
+        console.warn(`[ProxyPool Stats] Available: ${stats.available}, Bad: ${stats.badCount}`);
+    }
+
+    return result;
 }
 
 module.exports = { scrapeShopee, REASON };

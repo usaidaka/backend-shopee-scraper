@@ -10,7 +10,7 @@
 // - set it within a user.js file in your profile.
 
 user_pref("app.update.lastUpdateTime.addon-background-update-timer", 1775729225);
-user_pref("app.update.lastUpdateTime.browser-cleanup-thumbnails", 1775729225);
+user_pref("app.update.lastUpdateTime.browser-cleanup-thumbnails", 1775807602);
 user_pref("app.update.lastUpdateTime.region-update-timer", 1775729225);
 user_pref("app.update.lastUpdateTime.services-settings-poll-changes", 1775729225);
 user_pref("app.update.lastUpdateTime.telemetry_modules_ping", 1775729255);
@@ -30,7 +30,7 @@ user_pref("browser.policies.runOncePerModification.extensionsUninstall", "[\"goo
 user_pref("browser.proton.toolbar.version", 3);
 user_pref("browser.sessionstore.upgradeBackup.latestBuildID", "20250315105607");
 user_pref("browser.startup.couldRestoreSession.count", 2);
-user_pref("browser.startup.lastColdStartupCheck", 1775729452);
+user_pref("browser.startup.lastColdStartupCheck", 1775809014);
 user_pref("browser.theme.content-theme", 0);
 user_pref("browser.theme.toolbar-theme", 0);
 user_pref("browser.uiCustomization.state", "{\"placements\":{\"widget-overflow-fixed-list\":[],\"unified-extensions-area\":[],\"nav-bar\":[\"back-button\",\"forward-button\",\"stop-reload-button\",\"customizableui-special-spring1\",\"vertical-spacer\",\"urlbar-container\",\"customizableui-special-spring2\",\"save-to-pocket-button\",\"downloads-button\",\"fxa-toolbar-menu-button\",\"unified-extensions-button\"],\"TabsToolbar\":[\"tabbrowser-tabs\",\"new-tab-button\",\"alltabs-button\"],\"vertical-tabs\":[],\"PersonalToolbar\":[\"personal-bookmarks\"]},\"seen\":[\"developer-button\"],\"dirtyAreaCache\":[\"nav-bar\",\"vertical-tabs\",\"TabsToolbar\",\"PersonalToolbar\"],\"currentVersion\":21,\"newElementCount\":2}");
@@ -69,18 +69,12 @@ user_pref("privacy.bounceTrackingProtection.hasMigratedUserActivationData", true
 user_pref("privacy.purge_trackers.date_in_cookie_database", "0");
 user_pref("privacy.purge_trackers.last_purge", "1775727451641");
 user_pref("privacy.sanitize.clearOnShutdown.hasMigratedToNewPrefs2", true);
-user_pref("privacy.sanitize.pending", "[]");
+user_pref("privacy.sanitize.pending", "[{\"id\":\"newtab-container\",\"itemsToClear\":[],\"options\":{}}]");
 user_pref("security.sandbox.warn_unprivileged_namespaces", false);
 user_pref("sidebar.backupState", "{\"width\":\"\",\"command\":\"\",\"expanded\":false,\"hidden\":true}");
-<<<<<<< HEAD
-user_pref("signon.management.page.os-auth.optout", "MDIEEPgAAAAAAAAAAAAAAAAAAAEwFAYIKoZIhvcNAwcECAla/CeM55dABAjtsm5qnrlNdA==");
-user_pref("toolkit.startup.last_success", 1775729451);
-=======
-user_pref("signon.management.page.os-auth.optout", "MDIEEPgAAAAAAAAAAAAAAAAAAAEwFAYIKoZIhvcNAwcECB0O+i8XxAeMBAhEqy4NEVOlHw==");
 user_pref("storage.vacuum.last.index", 0);
 user_pref("storage.vacuum.last.places.sqlite", 1775727451);
-user_pref("toolkit.startup.last_success", 1775726808);
->>>>>>> d062e4b7aa9cf1057a09cade730f3165cac2634a
+user_pref("toolkit.startup.last_success", 1775809012);
 user_pref("toolkit.telemetry.cachedClientID", "c0ffeec0-ffee-c0ff-eec0-ffeec0ffeec0");
 user_pref("toolkit.telemetry.cachedProfileGroupID", "decafdec-afde-cafd-ecaf-decafdecafde");
 user_pref("toolkit.telemetry.previousBuildID", "20250315105607");

@@ -6,13 +6,15 @@ const USER_DATA_DIR = path.join(__dirname, 'chrome-data');
 
 /**
  * BrowserManager (Singleton)
- * Mengelola satu instance persistent browser kkonteks untuk menghindari error "Firefox is already open".
+ * Mengelola satu instance persistent browser context.
+ * Mendukung proxy rotation — bisa restart dengan proxy baru.
  */
 class BrowserManager {
     constructor() {
         this.context = null;
         this.isLaunching = false;
         this.launchWaiters = [];
+        this.currentProxy = null; // Track proxy yang sedang aktif
     }
 
     /**
@@ -20,7 +22,18 @@ class BrowserManager {
      * Jika sedang dalam proses pembuatan, akan menunggu sampai selesai.
      */
     async getContext(options = {}) {
-        if (this.context) return this.context;
+        // Jika ada context, cek apakah browser masih tersambung
+        if (this.context) {
+            try {
+                if (this.context.browser().isConnected()) {
+                    return this.context;
+                }
+                console.log('[BrowserManager] Browser disconnected, clearing stale context...');
+                this.context = null;
+            } catch (e) {
+                this.context = null;
+            }
+        }
 
         if (this.isLaunching) {
             return new Promise((resolve, reject) => {
@@ -30,12 +43,25 @@ class BrowserManager {
 
         this.isLaunching = true;
         try {
-            console.log('[BrowserManager] Launching shared persistent context...');
-            this.context = await Camoufox({
+            const launchOptions = {
                 headless: options.headless !== undefined ? options.headless : true,
                 user_data_dir: USER_DATA_DIR,
-                ...options
-            });
+            };
+
+            // Inject proxy jika ada
+            if (options.proxy) {
+                launchOptions.proxy = options.proxy;
+                this.currentProxy = options.proxy;
+                console.log(`[BrowserManager] Launching with proxy: ${options.proxy.server}`);
+            } else {
+                this.currentProxy = null;
+                console.log('[BrowserManager] Launching shared persistent context (no proxy)...');
+            }
+
+            this.context = await Camoufox(launchOptions);
+
+            // Buka satu page "keep-alive" agar browser tidak tutup otomatis saat page lain ditutup
+            await this.context.newPage();
 
             // Beritahu semua yang sedang menunggu
             while (this.launchWaiters.length > 0) {
@@ -58,6 +84,22 @@ class BrowserManager {
     }
 
     /**
+     * Restart browser context dengan proxy baru.
+     * Menutup context lama, lalu launch ulang dengan proxy yang diberikan.
+     * Profile data (cookies dll) tetap persisten di disk.
+     */
+    async restartWithProxy(proxyConfig) {
+        console.log(`[BrowserManager] Restarting with new proxy: ${proxyConfig ? proxyConfig.server : 'direct'}...`);
+        await this.close();
+        // Beri jeda singkat setelah close
+        await new Promise(r => setTimeout(r, 1000));
+        return this.getContext({
+            headless: false,
+            proxy: proxyConfig || undefined,
+        });
+    }
+
+    /**
      * Menutup browser jika diperlukan.
      */
     async close() {
@@ -65,7 +107,15 @@ class BrowserManager {
             console.log('[BrowserManager] Closing shared context...');
             await this.context.close().catch(() => {});
             this.context = null;
+            this.currentProxy = null;
         }
+    }
+
+    /**
+     * Cek apakah sedang menggunakan proxy
+     */
+    getCurrentProxy() {
+        return this.currentProxy;
     }
 }
 

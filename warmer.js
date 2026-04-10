@@ -1,10 +1,14 @@
 const browserManager = require('./browserManager');
 const TokenStore = require('./tokenStore');
+const proxyPool = require('./proxyPool');
 const { simulateHumanMouse, simulateHumanScroll, humanDelay } = require('./browserUtils');
 const { URL } = require('url');
 require('dotenv').config();
 
-function getProxyConfig() {
+/**
+ * Parse SHOPEE_PROXY dari .env (override manual — prioritas tertinggi)
+ */
+function getEnvProxyConfig() {
     const proxyStr = process.env.SHOPEE_PROXY;
     if (!proxyStr) return undefined;
     
@@ -30,11 +34,24 @@ async function warmSession() {
     let context;
     let page;
     try {
+        // Tentukan proxy: prioritas .env > free proxy pool > tanpa proxy
         const browserOptions = { headless: false };
-        const proxyConfig = getProxyConfig();
-        if (proxyConfig) {
-            console.log(`[Proxy-Warmer] Menghubungkan via proxy: ${proxyConfig.server}`);
-            browserOptions.proxy = proxyConfig;
+        const envProxy = getEnvProxyConfig();
+
+        if (envProxy) {
+            console.log(`[Warmer] Using .env proxy: ${envProxy.server}`);
+            browserOptions.proxy = envProxy;
+        } else if (process.env.SHOPEE_USE_FREE_PROXIES !== 'false') {
+            // Coba ambil free proxy
+            const freeProxy = await proxyPool.getNext();
+            if (freeProxy) {
+                console.log(`[Warmer] Using free proxy: ${freeProxy.server}`);
+                browserOptions.proxy = { server: freeProxy.server };
+            } else {
+                console.log('[Warmer] No proxy available, using direct connection.');
+            }
+        } else {
+            console.log('[Warmer] Free proxies disabled, using direct connection.');
         }
 
         // Gunakan shared context dari manager
