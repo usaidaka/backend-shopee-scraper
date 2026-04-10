@@ -61,7 +61,11 @@ async function setupSession() {
             }
 
             console.log('✓ Stabilisasi Selesai. Menutup browser...');
-        } else {
+            
+            // Simpan penanda bahwa sesi sudah benar-benar siap
+            const sessionReadyPath = path.join(__dirname, '.session_ready');
+            fs.writeFileSync(sessionReadyPath, new Date().toISOString());
+            console.log('✓ Sesi disimpan dan siap digunakan.');
             console.log('\n[TIMEOUT] Login tidak terdeteksi. Silakan coba lagi.');
         }
 

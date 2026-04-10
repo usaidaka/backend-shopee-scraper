@@ -115,8 +115,7 @@ app.get('/api/search', async (req, res) => {
     }
 });
 
-// ─── Login Flow Endpoints ──────────────────────────────────────────────────
-let loginProcess = null;
+const SESSION_READY_PATH = path.join(__dirname, '.session_ready');
 
 app.post('/api/login/start', async (req, res) => {
     if (loginProcess) {
@@ -125,10 +124,17 @@ app.post('/api/login/start', async (req, res) => {
 
     console.log('[API] Starting manual login process...');
     
+    // Hapus penanda sesi lama agar UI tahu proses sedang berjalan ulang
+    if (fs.existsSync(SESSION_READY_PATH)) {
+        fs.unlinkSync(SESSION_READY_PATH);
+    }
+
     // Harus menutup browser background dulu agar profile tidak bentrok denga headless
     try {
         console.log('[API] Pausing background browser to release profile lock...');
         await browserManager.close();
+        // Beri jeda 1.5 detik agar OS melepas gembok file secara sempurna
+        await new Promise(r => setTimeout(r, 1500));
     } catch (e) {
         console.error('[API] Error closing background browser:', e.message);
     }
@@ -156,8 +162,7 @@ app.get('/api/login/status', (req, res) => {
         return res.json({ status: 'running' });
     }
 
-    const userDataDir = path.join(__dirname, 'chrome-data');
-    if (fs.existsSync(userDataDir)) {
+    if (fs.existsSync(SESSION_READY_PATH)) {
         return res.json({ status: 'completed' });
     }
 
