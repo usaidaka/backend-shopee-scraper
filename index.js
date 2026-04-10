@@ -116,6 +116,7 @@ app.get('/api/search', async (req, res) => {
 });
 
 const SESSION_READY_PATH = path.join(__dirname, '.session_ready');
+let loginProcess = null;
 
 app.post('/api/login/start', async (req, res) => {
     if (loginProcess) {
