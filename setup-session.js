@@ -1,6 +1,7 @@
 const { Camoufox } = require('camoufox-js');
 const path = require('path');
 const { simulateHumanMouse, simulateHumanScroll, humanDelay } = require('./browserUtils');
+const fs = require('fs');
 require('dotenv').config();
 
 const USER_DATA_DIR = path.join(__dirname, 'chrome-data');
@@ -60,12 +61,10 @@ async function setupSession() {
                 await humanDelay(3000, 5000);
             }
 
-            console.log('✓ Stabilisasi Selesai. Menutup browser...');
-            
-            // Simpan penanda bahwa sesi sudah benar-benar siap
             const sessionReadyPath = path.join(__dirname, '.session_ready');
             fs.writeFileSync(sessionReadyPath, new Date().toISOString());
             console.log('✓ Sesi disimpan dan siap digunakan.');
+        } else {
             console.log('\n[TIMEOUT] Login tidak terdeteksi. Silakan coba lagi.');
         }
 

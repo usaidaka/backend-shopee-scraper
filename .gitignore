@@ -2,3 +2,8 @@ node_modules/
 .env
 dist/
 .DS_Store
+
+# Abaikan data browser dan cache kerahasiaan
+backend/chrome-data/
+backend/chrome-data/*
+.session_ready

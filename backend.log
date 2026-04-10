@@ -1,381 +1,487 @@
-◇ injected env (9) from .env // tip: ◈ encrypted .env [www.dotenvx.com]
-◇ injected env (0) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
-◇ injected env (0) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+◇ injected env (9) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
 ◇ injected env (0) from .env // tip: ◈ encrypted .env [www.dotenvx.com]
-◇ injected env (0) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+◇ injected env (0) from .env // tip: ◈ secrets for agents [www.dotenvx.com]
+◇ injected env (0) from .env // tip: ⌘ override existing { override: true }
+◇ injected env (0) from .env // tip: ◈ encrypted .env [www.dotenvx.com]
 Backend server listening at http://localhost:3001
 [Init] Starting background session warming...
 [Warmer] Starting session warming...
 [Warmer] Free proxies disabled, using direct connection.
 [BrowserManager] Launching shared persistent context (no proxy)...
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-[Warmer] Error: browserType.launchPersistentContext: Failed to launch the browser process.
+[Warmer] Navigating to Shopee...
+[HumanSim] Simulating random mouse movements...
+[API] Starting manual login process...
+[API] Pausing background browser to release profile lock...
+[BrowserManager] Closing shared context...
+[Warmer] Error: mouse.move: Target page, context or browser has been closed
 Browser logs:
 
 <launching> /Users/usaid.anshorulloh/Library/Caches/camoufox/Camoufox.app/Contents/MacOS/camoufox -no-remote -wait-for-browser -foreground -profile /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/chrome-data -juggler-pipe about:blank
-<launched> pid=87068
-[pid=87068] <process did exit: exitCode=0, signal=null>
-[pid=87068] starting temporary directories cleanup
+<launched> pid=89967
+[pid=89967][err] DEBUG: Juggler pipe initialized
+[pid=89967][err] DEBUG: Dispatcher created
+[pid=89967][err] DEBUG: BrowserHandler created
+[pid=89967][err] DEBUG: BrowserHandler set as root session handler
+[pid=89967][out] 
+[pid=89967][out] Juggler listening to the pipe
+[pid=89967][out] console.error: "Warning: unrecognized command line flag" "-wait-for-browser"
+[pid=89967][err] DEBUG: Failed to install addons: Error: Extension is invalid
+[pid=89967][out] console.error: SearchService: "#init: failure initializing search:" (new TypeError("defaultsConfig is undefined", "resource://gre/modules/SearchEngineSelector.sys.mjs", 752))
+[pid=89967][err] JavaScript error: resource://gre/modules/SearchEngineSelector.sys.mjs, line 752: TypeError: defaultsConfig is undefined
+[pid=89967][err] JavaScript error: resource://gre/modules/SearchEngineSelector.sys.mjs, line 752: TypeError: defaultsConfig is undefined
+[pid=89967][err] JavaScript error: resource://gre/modules/SearchEngineSelector.sys.mjs, line 752: TypeError: defaultsConfig is undefined
+[pid=89967][err] JavaScript error: resource://gre/modules/SearchEngineSelector.sys.mjs, line 752: TypeError: defaultsConfig is undefined
+[pid=89967][err] JavaScript error: chrome://juggler/content/Helper.js, line 82: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIWebProgress.removeProgressListener]
+[pid=89967][err] JavaScript error: resource://gre/modules/SearchEngineSelector.sys.mjs, line 752: TypeError: defaultsConfig is undefined
+[pid=89967][err] JavaScript error: resource://gre/modules/SearchService.sys.mjs, line 1290: Error: SearchService failed while it was initializing.
+[pid=89967][err] JavaScript error: resource://activity-stream/lib/TopSitesFeed.sys.mjs, line 144: NS_ERROR_XPC_JAVASCRIPT_ERROR_WITH_DETAILS: [JavaScript Error: "SearchService failed while it was initializing." {file: "resource://gre/modules/SearchService.sys.mjs" line: 1290}]'[JavaScript Error: "SearchService failed while it was initializing." {file: "resource://gre/modules/SearchService.sys.mjs" line: 1290}]' when calling method: [nsISearchService::defaultEngine]
+[pid=89967][out] console.error: "Could not parse ASRouter preference. Try resetting browser.newtabpage.activity-stream.asrouter.providers.snippets in about:config."
+[pid=89967][err] JavaScript error: resource://gre/modules/SearchEngineSelector.sys.mjs, line 752: TypeError: defaultsConfig is undefined
+[pid=89967][err] DEBUG: Failed to install addons: Error: Extension is invalid
+[pid=89967][out] console.error: WebExtensions: 
+[pid=89967][out]   Message: TypeError: defaultsConfig is undefined
+[pid=89967][out]   Stack:
+[pid=89967][out]     #defaultEngines@resource://gre/modules/SearchEngineSelector.sys.mjs:752:22
+[pid=89967][out] fetchEngineConfiguration@resource://gre/modules/SearchEngineSelector.sys.mjs:375:65
+[pid=89967][out] 
+[pid=89967][err] JavaScript error: resource://gre/modules/SearchEngineSelector.sys.mjs, line 752: TypeError: defaultsConfig is undefined
+[pid=89967][err] DEBUG: Failed to install addons: Error: Extension is invalid
+[pid=89967][out] console.error: SearchSettings: "_write: Could not write to settings file:" (new Error("cannot write without any engine.", "resource://gre/modules/SearchSettings.sys.mjs", 280))
+[pid=89967][err] JavaScript warning: https://deo.shopeemobile.com/shopee/modules-federation/live/0/shopee__web_enhance_sap/2.39.1004.js, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+[pid=89967][err] JavaScript warning: https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/assets/sws.0adebb3d9cc5de48.2023.js, line 14: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+[pid=89967][err] JavaScript warning: , line 0: WebGL warning: linkProgram: Must have a compiled fragment shader attached: Missing shader.
+[pid=89967][err] JavaScript warning: , line 0: WebGL warning: uniform setter: No active linked Program.
+[pid=89967][err] JavaScript warning: , line 0: WebGL warning: linkProgram: Must have a compiled fragment shader attached: Missing shader.
+[pid=89967][err] JavaScript warning: , line 0: WebGL warning: uniform setter: No active linked Program.
+[pid=89967][err] JavaScript warning: , line 0: WebGL warning: linkProgram: Must have a compiled fragment shader attached: Missing shader.
+[pid=89967][err] JavaScript warning: , line 0: WebGL warning: uniform setter: No active linked Program.
+[pid=89967][err] JavaScript error: chrome://juggler/content/content/FrameTree.js, line 292: NS_NOINTERFACE: Component returned failure code: 0x80004002 (NS_NOINTERFACE) [nsIWebProgress.DOMWindow]
+[pid=89967][err] JavaScript error: chrome://juggler/content/content/FrameTree.js, line 292: NS_NOINTERFACE: Component returned failure code: 0x80004002 (NS_NOINTERFACE) [nsIWebProgress.DOMWindow]
+[pid=89967][err] JavaScript warning: https://deo.shopeemobile.com/shopee/shopee-seller-live-id/chateasy/sandbox-indirect-eval-secure.9da278d2.28a211b89b275651db21.js, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+[pid=89967][err] JavaScript warning: , line 0: WebGL warning: linkProgram: Must have a compiled fragment shader attached: Missing shader.
+[pid=89967][err] JavaScript warning: , line 0: WebGL warning: uniform setter: No active linked Program.
+[pid=89967][err] JavaScript warning: , line 0: WebGL warning: linkProgram: Must have a compiled fragment shader attached: Missing shader.
+[pid=89967][err] JavaScript warning: , line 0: WebGL warning: uniform setter: No active linked Program.
+[pid=89967][err] JavaScript warning: , line 0: WebGL warning: linkProgram: Must have a compiled fragment shader attached: Missing shader.
+[pid=89967][err] JavaScript warning: , line 0: WebGL warning: uniform setter: No active linked Program.
+[pid=89967][err] JavaScript error: resource://gre/modules/SearchEngineSelector.sys.mjs, line 752: TypeError: defaultsConfig is undefined
+[pid=89967] <gracefully close start>
+[pid=89967][err] DEBUG: BrowserHandler cleanup callback called
+[Warmer] Worker page closed.
+◇ injected env (0) from .env // tip: ⌘ override existing { override: true }
+--- Shopee Deep Stealth Login Setup ---
+Membuka browser dengan profil persisten...
+Membuka halaman login...
+
+[PENTING] LANGKAH-LANGKAH:
+1. Silakan Login seperti biasa.
+2. Selesaikan Captcha jika muncul.
+3. JANGAN TUTUP BROWSER setelah login.
+4. Tunggu instruksi "✓ Stabilisasi Selesai" di terminal ini.
+
+✓ Login berhasil!
+Menjalankan fase stabilisasi (Simulasi aktivitas manusia)...
+[HumanSim] Simulating random mouse movements...
+[HumanSim] Simulating human scroll...
+[HumanSim] Simulating random mouse movements...
+[HumanSim] Simulating human scroll...
+[HumanSim] Simulating random mouse movements...
+[HumanSim] Simulating human scroll...
+✓ Sesi disimpan dan siap digunakan.
+Browser/Profile ditutup.
+[API] Login process exited with code 0
+[API] Starting manual login process...
+[API] Pausing background browser to release profile lock...
+◇ injected env (0) from .env // tip: ◈ encrypted .env [www.dotenvx.com]
+--- Shopee Deep Stealth Login Setup ---
+Membuka browser dengan profil persisten...
+Membuka halaman login...
+
+[PENTING] LANGKAH-LANGKAH:
+1. Silakan Login seperti biasa.
+2. Selesaikan Captcha jika muncul.
+3. JANGAN TUTUP BROWSER setelah login.
+4. Tunggu instruksi "✓ Stabilisasi Selesai" di terminal ini.
+
+✓ Login berhasil!
+Menjalankan fase stabilisasi (Simulasi aktivitas manusia)...
+[HumanSim] Simulating random mouse movements...
+[HumanSim] Simulating human scroll...
+[HumanSim] Simulating random mouse movements...
+[HumanSim] Simulating human scroll...
+[HumanSim] Simulating random mouse movements...
+[HumanSim] Simulating human scroll...
+✓ Sesi disimpan dan siap digunakan.
+Browser/Profile ditutup.
+[API] Login process exited with code 0
+[API] Starting manual login process...
+[API] Pausing background browser to release profile lock...
+◇ injected env (0) from .env // tip: ⌘ suppress logs { quiet: true }
+--- Shopee Deep Stealth Login Setup ---
+Membuka browser dengan profil persisten...
+Membuka halaman login...
+
+[PENTING] LANGKAH-LANGKAH:
+1. Silakan Login seperti biasa.
+2. Selesaikan Captcha jika muncul.
+3. JANGAN TUTUP BROWSER setelah login.
+4. Tunggu instruksi "✓ Stabilisasi Selesai" di terminal ini.
+
+✓ Login berhasil!
+Menjalankan fase stabilisasi (Simulasi aktivitas manusia)...
+[HumanSim] Simulating random mouse movements...
+[HumanSim] Simulating human scroll...
+[HumanSim] Simulating random mouse movements...
+[HumanSim] Simulating human scroll...
+[HumanSim] Simulating random mouse movements...
+[HumanSim] Simulating human scroll...
+✓ Sesi disimpan dan siap digunakan.
+Browser/Profile ditutup.
+[API] Login process exited with code 0
+[Auto-Refresh] Refreshing session tokens...
+[Warmer] Starting session warming...
+[Warmer] Free proxies disabled, using direct connection.
+[BrowserManager] Launching shared persistent context (no proxy)...
+[Warmer] Navigating to Shopee...
+[HumanSim] Simulating random mouse movements...
+[HumanSim] Simulating human scroll...
+[Warmer] Triggering internal API via search: baju
+[API] Starting manual login process...
+[API] Pausing background browser to release profile lock...
+[BrowserManager] Closing shared context...
+[Warmer] Error: page.goto: Target page, context or browser has been closed
 Call log:
-  - <launching> /Users/usaid.anshorulloh/Library/Caches/camoufox/Camoufox.app/Contents/MacOS/camoufox -no-remote -wait-for-browser -foreground -profile /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/chrome-data -juggler-pipe about:blank
-  - <launched> pid=87068
-  - [pid=87068] <process did exit: exitCode=0, signal=null>
-  - [pid=87068] starting temporary directories cleanup
-  - [pid=87068] <gracefully close start>
-  - [pid=87068] <kill>
-  - [pid=87068] <skipped force kill spawnedProcess.killed=false processClosed=true>
-  - [pid=87068] finished temporary directories cleanup
-  - [pid=87068] <gracefully close end>
+  - navigating to "https://shopee.co.id/search?keyword=baju", waiting until "networkidle"
 
 [Warmer] Worker page closed.
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
-ReferenceError: loginProcess is not defined
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:161:5
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:157:13)
-    at Route.dispatch (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/route.js:117:3)
-    at handle (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:435:11)
-    at Layer.handleRequest (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/lib/layer.js:152:17)
-    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:295:15
-    at processParams (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:582:12)
-    at next (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/router/index.js:291:5)
-    at read (/Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/body-parser/lib/read.js:53:5)
+◇ injected env (0) from .env // tip: ⌘ override existing { override: true }
+--- Shopee Deep Stealth Login Setup ---
+Membuka browser dengan profil persisten...
+Membuka halaman login...
+
+[PENTING] LANGKAH-LANGKAH:
+1. Silakan Login seperti biasa.
+2. Selesaikan Captcha jika muncul.
+3. JANGAN TUTUP BROWSER setelah login.
+4. Tunggu instruksi "✓ Stabilisasi Selesai" di terminal ini.
+
+✓ Login berhasil!
+Menjalankan fase stabilisasi (Simulasi aktivitas manusia)...
+[HumanSim] Simulating random mouse movements...
+[HumanSim] Simulating human scroll...
+[HumanSim] Simulating random mouse movements...
+[HumanSim] Simulating human scroll...
+[HumanSim] Simulating random mouse movements...
+[HumanSim] Simulating human scroll...
+✓ Sesi disimpan dan siap digunakan.
+Browser/Profile ditutup.
+[API] Login process exited with code 0
+[API] Starting manual login process...
+[API] Pausing background browser to release profile lock...
+◇ injected env (0) from .env // tip: ⌘ enable debugging { debug: true }
+--- Shopee Deep Stealth Login Setup ---
+Membuka browser dengan profil persisten...
+Membuka halaman login...
+
+[PENTING] LANGKAH-LANGKAH:
+1. Silakan Login seperti biasa.
+2. Selesaikan Captcha jika muncul.
+3. JANGAN TUTUP BROWSER setelah login.
+4. Tunggu instruksi "✓ Stabilisasi Selesai" di terminal ini.
+
+✓ Login berhasil!
+Menjalankan fase stabilisasi (Simulasi aktivitas manusia)...
+[HumanSim] Simulating random mouse movements...
+[HumanSim] Simulating human scroll...
+[HumanSim] Simulating random mouse movements...
+[HumanSim] Simulating human scroll...
+[HumanSim] Simulating random mouse movements...
+[HumanSim] Simulating human scroll...
+✓ Sesi disimpan dan siap digunakan.
+Browser/Profile ditutup.
+[API] Login process exited with code 0
+[API] Starting manual login process...
+[API] Pausing background browser to release profile lock...
+◇ injected env (0) from .env // tip: ⌘ suppress logs { quiet: true }
+--- Shopee Deep Stealth Login Setup ---
+Membuka browser dengan profil persisten...
+Membuka halaman login...
+
+[PENTING] LANGKAH-LANGKAH:
+1. Silakan Login seperti biasa.
+2. Selesaikan Captcha jika muncul.
+3. JANGAN TUTUP BROWSER setelah login.
+4. Tunggu instruksi "✓ Stabilisasi Selesai" di terminal ini.
+
+✓ Login berhasil!
+Menjalankan fase stabilisasi (Simulasi aktivitas manusia)...
+[HumanSim] Simulating random mouse movements...
+[HumanSim] Simulating human scroll...
+[HumanSim] Simulating random mouse movements...
+[HumanSim] Simulating human scroll...
+[HumanSim] Simulating random mouse movements...
+[HumanSim] Simulating human scroll...
+✓ Sesi disimpan dan siap digunakan.
+Browser/Profile ditutup.
+[API] Login process exited with code 0
+[API] Cache miss/expired for: "laptop". Starting scrape.
+[Camoufox] Starting deep stealth scrape for: "laptop"
+[BrowserManager] Launching shared persistent context (no proxy)...
+[Camoufox] Navigating to search: https://shopee.co.id/search?keyword=laptop
+[HumanSim] Simulating random mouse movements...
+[Camoufox] Error: mouse.move: Target page, context or browser has been closed
+[Camoufox] Scraper page closed.
+[Cache] Anti-bot triggered. Serving stale cache for: "laptop"
+[API] Cache miss/expired for: "sepatu". Starting scrape.
+[Camoufox] Starting deep stealth scrape for: "sepatu"
+[Camoufox] Navigating to search: https://shopee.co.id/search?keyword=sepatu
+[HumanSim] Simulating random mouse movements...
+[HumanSim] Simulating human scroll...
+[Camoufox] API intercept failed, trying DOM extraction...
+[Camoufox] Scraper page closed.
+[API] Scraped 3 items for "sepatu". Cache updated.
+[API] Cache miss/expired for: "laptop". Starting scrape.
+[Camoufox] Starting deep stealth scrape for: "laptop"
+[Camoufox] Navigating to search: https://shopee.co.id/search?keyword=laptop
+[HumanSim] Simulating random mouse movements...
+[HumanSim] Simulating human scroll...
+[Camoufox] API intercept failed, trying DOM extraction...
+[Camoufox] Scraper page closed.
+[API] Scraped 3 items for "laptop". Cache updated.
+[Cache] Fresh hit for: "sepatu"
+[API] Cache miss/expired for: "topi". Starting scrape.
+[Camoufox] Starting deep stealth scrape for: "topi"
+[Camoufox] Navigating to search: https://shopee.co.id/search?keyword=topi
+[HumanSim] Simulating random mouse movements...
+[HumanSim] Simulating human scroll...
+[Camoufox] API intercept failed, trying DOM extraction...
+[Camoufox] Scraper page closed.
+[API] Scraped 3 items for "topi". Cache updated.
+[API] Cache miss/expired for: "baju". Starting scrape.
+[Camoufox] Starting deep stealth scrape for: "baju"
+[Camoufox] Navigating to search: https://shopee.co.id/search?keyword=baju
+[HumanSim] Simulating random mouse movements...
+[HumanSim] Simulating human scroll...
+[Camoufox] API intercept failed, trying DOM extraction...
+[Camoufox] Scraper page closed.
+[API] Scraped 3 items for "baju". Cache updated.
+[Auto-Refresh] Refreshing session tokens...
+[Warmer] Starting session warming...
+[Warmer] Free proxies disabled, using direct connection.
+[Warmer] Navigating to Shopee...
+[HumanSim] Simulating random mouse movements...
+[Auto-Refresh] Refreshing session tokens...
+[Warmer] Starting session warming...
+[Warmer] Free proxies disabled, using direct connection.
+[Warmer] Navigating to Shopee...
+[Warmer] Error: page.goto: NS_ERROR_UNKNOWN_HOST
+Call log:
+  - navigating to "https://shopee.co.id/", waiting until "networkidle"
+
+[Warmer] Worker page closed.
+[Auto-Refresh] Refreshing session tokens...
+[Warmer] Starting session warming...
+[Warmer] Free proxies disabled, using direct connection.
+[Warmer] Navigating to Shopee...
+[Warmer] Error: page.goto: NS_ERROR_UNKNOWN_HOST
+Call log:
+  - navigating to "https://shopee.co.id/", waiting until "networkidle"
+
+[Warmer] Worker page closed.
+[Auto-Refresh] Refreshing session tokens...
+[Warmer] Starting session warming...
+[Warmer] Free proxies disabled, using direct connection.
+[Warmer] Navigating to Shopee...
+[Warmer] Error: page.goto: NS_ERROR_UNKNOWN_HOST
+Call log:
+  - navigating to "https://shopee.co.id/", waiting until "networkidle"
+
+[Warmer] Worker page closed.
+[Auto-Refresh] Refreshing session tokens...
+[Warmer] Starting session warming...
+[Warmer] Free proxies disabled, using direct connection.
+[Warmer] Navigating to Shopee...
+[Warmer] Error: page.goto: NS_ERROR_UNKNOWN_HOST
+Call log:
+  - navigating to "https://shopee.co.id/", waiting until "networkidle"
+
+[Warmer] Worker page closed.
+[Auto-Refresh] Refreshing session tokens...
+[Warmer] Starting session warming...
+[Warmer] Free proxies disabled, using direct connection.
+[Warmer] Navigating to Shopee...
+[HumanSim] Simulating random mouse movements...
+[Auto-Refresh] Refreshing session tokens...
+[Warmer] Starting session warming...
+[Warmer] Free proxies disabled, using direct connection.
+[Warmer] Navigating to Shopee...
+[Auto-Refresh] Refreshing session tokens...
+[Warmer] Starting session warming...
+[Warmer] Free proxies disabled, using direct connection.
+[Warmer] Error: page.goto: Timeout 60000ms exceeded.
+Call log:
+  - navigating to "https://shopee.co.id/", waiting until "networkidle"
+
+[Warmer] Worker page closed.
+[Warmer] Navigating to Shopee...
+[Warmer] Error: page.goto: NS_ERROR_ABORT
+Call log:
+  - navigating to "https://shopee.co.id/", waiting until "networkidle"
+
+[Warmer] Worker page closed.
+[Auto-Refresh] Refreshing session tokens...
+[Warmer] Starting session warming...
+[Warmer] Free proxies disabled, using direct connection.
+[Warmer] Navigating to Shopee...
+[Auto-Refresh] Refreshing session tokens...
+[Warmer] Starting session warming...
+[Warmer] Free proxies disabled, using direct connection.
+[Warmer] Error: page.goto: Timeout 60000ms exceeded.
+Call log:
+  - navigating to "https://shopee.co.id/", waiting until "networkidle"
+
+[Warmer] Worker page closed.
+[Warmer] Navigating to Shopee...
+[Auto-Refresh] Refreshing session tokens...
+[Warmer] Starting session warming...
+[Warmer] Free proxies disabled, using direct connection.
+[Warmer] Error: page.goto: NS_ERROR_ABORT
+Call log:
+  - navigating to "https://shopee.co.id/", waiting until "networkidle"
+
+[Warmer] Worker page closed.
+[Warmer] Navigating to Shopee...
+[HumanSim] Simulating random mouse movements...
+[Auto-Refresh] Refreshing session tokens...
+[Warmer] Starting session warming...
+[Warmer] Free proxies disabled, using direct connection.
+[Warmer] Navigating to Shopee...
+[Auto-Refresh] Refreshing session tokens...
+[Warmer] Starting session warming...
+[Warmer] Free proxies disabled, using direct connection.
+[Warmer] Error: page.goto: Timeout 60000ms exceeded.
+Call log:
+  - navigating to "https://shopee.co.id/", waiting until "networkidle"
+
+[Warmer] Worker page closed.
+[Warmer] Navigating to Shopee...
+[Warmer] Error: page.goto: NS_ERROR_ABORT
+Call log:
+  - navigating to "https://shopee.co.id/", waiting until "networkidle"
+
+[Warmer] Worker page closed.
+[Auto-Refresh] Refreshing session tokens...
+[Warmer] Starting session warming...
+[Warmer] Free proxies disabled, using direct connection.
+[Warmer] Navigating to Shopee...
+[Warmer] Error: page.goto: Timeout 60000ms exceeded.
+Call log:
+  - navigating to "https://shopee.co.id/", waiting until "networkidle"
+
+[Warmer] Worker page closed.
+[Auto-Refresh] Refreshing session tokens...
+[Warmer] Starting session warming...
+[Warmer] Free proxies disabled, using direct connection.
+[Warmer] Navigating to Shopee...
+[Warmer] Error: page.goto: NS_ERROR_ABORT
+Call log:
+  - navigating to "https://shopee.co.id/", waiting until "networkidle"
+
+[Warmer] Worker page closed.
+[Auto-Refresh] Refreshing session tokens...
+[Warmer] Starting session warming...
+[Warmer] Free proxies disabled, using direct connection.
+[Warmer] Navigating to Shopee...
+[Auto-Refresh] Refreshing session tokens...
+[Warmer] Starting session warming...
+[Warmer] Free proxies disabled, using direct connection.
+[Warmer] Error: page.goto: Timeout 60000ms exceeded.
+Call log:
+  - navigating to "https://shopee.co.id/", waiting until "networkidle"
+
+[Warmer] Worker page closed.
+[Warmer] Navigating to Shopee...
+[Warmer] Error: page.goto: NS_ERROR_UNKNOWN_HOST
+Call log:
+  - navigating to "https://shopee.co.id/", waiting until "networkidle"
+
+[Warmer] Worker page closed.
+[Auto-Refresh] Refreshing session tokens...
+[Warmer] Starting session warming...
+[Warmer] Free proxies disabled, using direct connection.
+[Warmer] Navigating to Shopee...
+[Warmer] Error: page.goto: NS_ERROR_ABORT
+Call log:
+  - navigating to "https://shopee.co.id/", waiting until "networkidle"
+
+[Warmer] Worker page closed.
+[Auto-Refresh] Refreshing session tokens...
+[Warmer] Starting session warming...
+[Warmer] Free proxies disabled, using direct connection.
+[Warmer] Navigating to Shopee...
+[HumanSim] Simulating random mouse movements...
+[Auto-Refresh] Refreshing session tokens...
+[Warmer] Starting session warming...
+[Warmer] Free proxies disabled, using direct connection.
+[Warmer] Navigating to Shopee...
+[Warmer] Error: page.goto: NS_ERROR_ABORT
+Call log:
+  - navigating to "https://shopee.co.id/", waiting until "networkidle"
+
+[Warmer] Worker page closed.
+[Auto-Refresh] Refreshing session tokens...
+[Warmer] Starting session warming...
+[Warmer] Free proxies disabled, using direct connection.
+[Warmer] Navigating to Shopee...
+[Auto-Refresh] Refreshing session tokens...
+[Warmer] Starting session warming...
+[Warmer] Free proxies disabled, using direct connection.
+[Warmer] Error: page.goto: Timeout 60000ms exceeded.
+Call log:
+  - navigating to "https://shopee.co.id/", waiting until "networkidle"
+
+[Warmer] Worker page closed.
+[Warmer] Navigating to Shopee...
+[Warmer] Error: page.goto: Timeout 60000ms exceeded.
+Call log:
+  - navigating to "https://shopee.co.id/", waiting until "networkidle"
+
+[Warmer] Worker page closed.
+[HumanSim] Simulating human scroll...
+[HumanSim] Simulating human scroll...
+[HumanSim] Simulating human scroll...
+[HumanSim] Simulating human scroll...
+[Warmer] Triggering internal API via search: tas
+[Warmer] Triggering internal API via search: baju
+[Warmer] Triggering internal API via search: baju
+[Warmer] Triggering internal API via search: tas
+[TokenStore] Session tokens updated successfully.
+[Warmer] Session warmed successfully.
+[Warmer] Worker page closed.
+[TokenStore] Session tokens updated successfully.
+[Warmer] Session warmed successfully.
+[Warmer] Worker page closed.
+[TokenStore] Session tokens updated successfully.
+[Warmer] Session warmed successfully.
+[Warmer] Worker page closed.
+[TokenStore] Session tokens updated successfully.
+[Warmer] Session warmed successfully.
+[Warmer] Worker page closed.
+[API] Unexpected error: Error: read ECONNRESET
+    at /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/node_modules/pg-pool/index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async /Users/usaid.anshorulloh/Documents/final_scraping_shopee/backend/index.js:33:28 {
+  errno: -54,
+  code: 'ECONNRESET',
+  syscall: 'read'
+}
+[Auto-Refresh] Refreshing session tokens...
+[Warmer] Starting session warming...
+[Warmer] Free proxies disabled, using direct connection.
+[Warmer] Navigating to Shopee...
+[HumanSim] Simulating random mouse movements...
+[HumanSim] Simulating human scroll...
+[Warmer] Triggering internal API via search: sepatu
+[TokenStore] Session tokens updated successfully.
+[Warmer] Session warmed successfully.
+[Warmer] Worker page closed.
