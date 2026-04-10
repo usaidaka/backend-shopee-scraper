@@ -16,7 +16,7 @@ const USER_DATA_DIR = path.join(__dirname, 'chrome-data');
 function getEnvProxyConfig() {
     const proxyStr = process.env.SHOPEE_PROXY;
     if (!proxyStr) return undefined;
-    
+
     try {
         const proxyUrl = new URL(proxyStr);
         return {
@@ -84,7 +84,7 @@ async function scrapeViaCamoufox(keyword) {
                         } else {
                             capturedReason = REASON.ANTIBOT;
                         }
-                    } catch (e) {}
+                    } catch (e) { }
                 } else if (status === 403 || status === 429) {
                     capturedReason = REASON.ANTIBOT;
                 }
@@ -93,7 +93,7 @@ async function scrapeViaCamoufox(keyword) {
 
         const url = `https://shopee.co.id/search?keyword=${encodeURIComponent(keyword)}`;
         console.log(`[Camoufox] Navigating to search: ${url}`);
-        
+
         await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
 
         await simulateHumanMouse(page);
@@ -127,12 +127,12 @@ async function scrapeViaCamoufox(keyword) {
             // Gunakan selektor href yang sangat konsisten di Shopee (berakhiran -i.shopid.itemid)
             const cards = Array.from(document.querySelectorAll('a[data-sqe="link"], a[href*="-i."]'));
             const items = [];
-            
+
             for (const el of cards) {
                 // Ambil semua teks dari div di dalam card ini
                 const candidateDivs = Array.from(el.querySelectorAll('div, span'));
                 let name = '';
-                
+
                 // Cari innerText yang cukup panjang yang tidak mengandung kata-kata harga/terjual (biasanya itu nama judul)
                 for (const node of candidateDivs) {
                     const text = node.innerText?.trim() || '';
@@ -141,7 +141,7 @@ async function scrapeViaCamoufox(keyword) {
                         break;
                     }
                 }
-                
+
                 // Fallback kedua: baca atribut alt pada gambar produk
                 if (!name) {
                     const img = el.querySelector('img');
@@ -153,12 +153,12 @@ async function scrapeViaCamoufox(keyword) {
                 const priceMatch = el.innerText.match(/Rp\s*([\d.]+)/);
                 const priceStr = priceMatch ? priceMatch[0] : '';
                 const priceNum = priceStr ? parseInt(priceStr.replace(/[^\d]/g, '')) : 0;
-                
+
                 if (name && priceNum > 0) {
                     items.push({ name, price: priceNum, priceStr, link: el.href || '' });
                 }
-                
-                if (items.length >= 3) break;
+
+                if (items.length >= 15) break;
             }
             return items;
         }).catch((e) => {
@@ -181,7 +181,7 @@ async function scrapeViaCamoufox(keyword) {
         console.error('[Camoufox] Error:', err.message);
         return { items: [], reason: REASON.ERROR };
     } finally {
-        if (page) await page.close().catch(() => {});
+        if (page) await page.close().catch(() => { });
         console.log('[Camoufox] Scraper page closed.');
     }
 }

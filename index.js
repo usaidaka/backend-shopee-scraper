@@ -59,20 +59,25 @@ app.get('/api/search', async (req, res) => {
 
         // ─── Step 4: Scrape success → save fresh cache & return ──────────────
         if (scrapedItems && scrapedItems.length > 0) {
+            // Urutkan dari termurah dan ambil 3 teratas
+            const sortedItems = scrapedItems
+                .sort((a, b) => a.price - b.price)
+                .slice(0, 3);
+
             await pool.query(
                 `INSERT INTO search_caches (keyword, items, created_at)
                  VALUES ($1, $2, NOW())
                  ON CONFLICT (keyword) DO UPDATE 
                  SET items = EXCLUDED.items, created_at = NOW();`,
-                [keyword, JSON.stringify(scrapedItems)]
+                [keyword, JSON.stringify(sortedItems)]
             );
 
-            console.log(`[API] Scraped ${scrapedItems.length} items for "${keyword}". Cache updated.`);
+            console.log(`[API] Scraped ${scrapedItems.length} items. Returning top 3 cheapest for "${keyword}".`);
             return res.json({
                 cached: false,
                 stale: false,
                 keyword,
-                items: scrapedItems
+                items: sortedItems
             });
         }
 
@@ -89,13 +94,18 @@ app.get('/api/search', async (req, res) => {
         // Anti-bot triggered → try stale cache fallback
         if (reason === REASON.ANTIBOT || reason === REASON.ERROR) {
             if (staleItems && staleItems.length > 0) {
-                console.warn(`[Cache] Anti-bot triggered. Serving stale cache for: "${keyword}"`);
+                // Pastikan cache lama juga terurut termurah
+                const sortedStale = staleItems
+                    .sort((a, b) => a.price - b.price)
+                    .slice(0, 3);
+
+                console.warn(`[Cache] Anti-bot triggered. Serving top 3 cheapest stale cache for: "${keyword}"`);
                 return res.json({
                     cached: true,
                     stale: true,
                     reason: 'ANTIBOT',
                     keyword,
-                    items: staleItems
+                    items: sortedStale
                 });
             }
 
