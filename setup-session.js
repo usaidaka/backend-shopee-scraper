@@ -21,8 +21,7 @@ async function setupSession() {
             user_data_dir: USER_DATA_DIR, // Menggunakan folder permanen
         });
 
-        const page = context.pages().length > 0 ? context.pages()[0] : await context.newPage();
-        
+        const page = await context.newPage();
         // Buka halaman login
         console.log('Membuka halaman login...');
         await page.goto('https://shopee.co.id/buyer/login', { waitUntil: 'networkidle', timeout: 90000 });

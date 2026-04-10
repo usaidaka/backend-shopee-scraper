@@ -3,6 +3,7 @@ const cors = require('cors');
 const { Pool } = require('pg');
 const { scrapeShopee, REASON } = require('./scraper');
 const { warmSession } = require('./warmer');
+const browserManager = require('./browserManager');
 const { spawn } = require('child_process');
 const fs = require('fs');
 const path = require('path');
@@ -117,12 +118,21 @@ app.get('/api/search', async (req, res) => {
 // ─── Login Flow Endpoints ──────────────────────────────────────────────────
 let loginProcess = null;
 
-app.post('/api/login/start', (req, res) => {
+app.post('/api/login/start', async (req, res) => {
     if (loginProcess) {
         return res.json({ status: 'running' });
     }
 
     console.log('[API] Starting manual login process...');
+    
+    // Harus menutup browser background dulu agar profile tidak bentrok denga headless
+    try {
+        console.log('[API] Pausing background browser to release profile lock...');
+        await browserManager.close();
+    } catch (e) {
+        console.error('[API] Error closing background browser:', e.message);
+    }
+
     loginProcess = spawn(process.execPath, ['setup-session.js'], {
         cwd: __dirname,
         stdio: 'inherit' // Allows the terminal output to show in the backend logs
